@@ -1,18 +1,14 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-class MoviesType extends React.Component {
-    state = {
-        type: 'all'
+function  MoviesType ({handleTypeMovie}) {
+    const [type, setType] = useState('all')
+
+    const handleChange = (event) => {
+        console.log(event.target.value)
+        setType(event.target.value);
+        handleTypeMovie(event.target.value);
     }
 
-    handleChange = (event) => {
-        this.setState({type: event.target.value});
-        this.props.handleTypeMovie(event.target.value);
-
-    }
-
-    render() {
-        const {type} = this.state;
         return <div className="type-movie">
             <p>
                 <label>
@@ -21,7 +17,7 @@ class MoviesType extends React.Component {
                            type="radio"
                            value="all"
                            checked={type === "all"}
-                           onChange={this.handleChange}
+                           onChange={handleChange}
                     />
                     <span>All</span>
                 </label>
@@ -33,7 +29,7 @@ class MoviesType extends React.Component {
                            type="radio"
                            value="movie"
                            checked={type === "movie"}
-                           onChange={this.handleChange}
+                           onChange={handleChange}
 
                     />
                     <span>Movie only</span>
@@ -46,14 +42,13 @@ class MoviesType extends React.Component {
                            type="radio"
                            value="series"
                            checked={type === "series"}
-                           onChange={this.handleChange}
+                           onChange={handleChange}
 
                     />
                     <span>Series only</span>
                 </label>
             </p>
         </div>
-    }
 }
 
 export {MoviesType}
